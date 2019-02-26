@@ -1,0 +1,104 @@
+var weatherdata = [];
+var year = [];
+var winter = [];
+var speed = 5;
+var innercirc = 150;
+var outercirc = 1300 + innercirc;
+var points = 144;
+var pointAngle = 360/points
+var radius = outercirc/2;
+
+
+function preload(){
+    raindata = loadTable("loadJSON.php","csv","header");
+    // sound_a = loadSound('notes/piano-a.wav');
+    // sound_b = loadSound('notes/piano-b.wav');
+    // sound_bb = loadSound('notes/piano-bb.wav');
+    // sound_c = loadSound('notes/piano-c.wav');
+    // sound_cs = loadSound('notes/piano-cs.wav');
+    // sound_d = loadSound('notes/piano-d.wav');
+    // sound_e = loadSound('notes/piano-e.wav');
+    // sound_eb = loadSound('notes/piano-eb.wav');
+    // sound_f = loadSound('notes/piano-f.wav');
+    // sound_fs = loadSound('notes/piano-fs.wav');
+    // sound_g = loadSound('notes/piano-g.wav');
+    // sound_gs = loadSound('notes/piano-gs.wav');
+}
+
+function setup() {
+  createCanvas(1500,1500);
+
+  angleMode(DEGREES);
+   y=radius*(cos(pointAngle));
+    console.log(y);
+    x=radius*(sin(pointAngle));
+    console.log(x);
+    console.log(radius);
+    console.log(pointAngle);
+}
+
+
+
+function draw() {
+    background(4,35,53);
+    rainfallyear = raindata.getColumn('year');
+    winterrain = raindata.getColumn('winter');
+      
+            
+                push();
+                translate(750,750);
+                stroke(53,66,92);
+                strokeWeight(1);
+                fill(4,35,53);
+                ellipse(0,0,innercirc);
+                noFill();
+                ellipse(0,0,(outercirc));
+                pop();
+            
+                // push();
+                // translate(750,750);
+            
+                //   var a = radius*(sin(points));
+                //   var b = radius*(cos(points));
+                //   strokeWeight(1);
+                //   stroke(53,66,92);
+                //   line(0,0,a,b);
+                // pop();
+                
+                push();
+                translate(750,750);
+                    for (i=0; i<360; i+=2.5){
+                        for(j=0; j<rainfallyear.length; j++){
+                            //rainfallyear.length
+                            var length = map(winterrain[j],111,609.9,0,362.5);
+                            var mathcos = cos([i])
+                            // console.log(length);
+                            var c = radius*(sin([i]));
+                            var d = radius*(cos([i]));
+                            // console.log(d);
+                            var rad = length;
+                            var c1 = rad*(sin([i]));
+                            var d1 = rad*(cos([i]));
+                            // console.log(d1);
+                            
+                            // console.log(c1)
+                            // stroke(255,192,203);
+                          
+                            stroke(255);
+                            strokeWeight(1);
+                            line(0,0,c1,d1);
+                            // ellipse(c1,d1,2.5,2.5);
+                            
+                            // console.log(rad);
+                            strokeWeight(1);
+                            stroke(53,66,92,50);
+                            line(0,0,c,d);
+                            
+                        }
+                    }
+                pop();
+                
+            }
+            
+
+
