@@ -25,6 +25,7 @@ var sound_c;
 var sound_eb;
 var sound_g;
 var w = 0;
+var tick = 0;
 
 function preload(){
     raindata = loadTable("loadJSON.php","csv","header");
@@ -47,10 +48,11 @@ function setup() {
   angleMode(DEGREES);
   
   frameRate(15);
-  
+
   buttonspring = createButton('SPRING');
-  buttonspring.position(760,0);
+  buttonspring.position(1250,37.5);
   buttonspring.mousePressed(getSpring)
+
  
   
   
@@ -84,20 +86,30 @@ function draw() {
                 ellipse(0,0,innercirc); //drwaing an ellipse with radius innercirc defined earlier
                 noFill();
                 ellipse(0,0,(outercirc));   //drawing an ellipse with radius outercirc defined earlier
-                pop();
                 
+                fill(0);
+                strokeWeight(1);
+                x = (radius)*(sin([tick]));
+                y = (radius)*(cos([tick]));
+                console.log(x)
+                line(0,0,x,y);
+                tick +=0.1;
+                pop();
+            
                 push();
                 translate(750,750); //translating the point of origin to the middle of the canvas
         
-                    for(j=0; j<90; j++){// a for loop to run through my rainfall table of data
-                        // for(n=0; n<360)
-                        // var c = (radius)*(mathsin);  //variable to calculate the radius multiplied by the sine angle (using pythagoraus for calculating unknown lengths)
-                        // var d = (radius)*(mathcos); //variable to calculate the radius multiplied by the cosine angle
-                        // var space = ([n]*(pointAngle));
-                        // var mathcos = cos([pointAngle]); //variable to work out the cosine of an angle [i]
-                        // var mathsin = sin([pointAngle]); //variable to work out the sine of an angle [i]
+                    for(j=0; j<rainfallyear.length; j++){// a for loop to run through my rainfall table of data
+                      
                         push();
                         // for(w=0;w<360;w+=4){
+                            stroke(140,173,167);
+                            strokeWeight(10);
+                            line(600,-643,640,-643);
+                            textSize(10);
+                            noStroke();
+                            fill(255);
+                            text('WINTER',600,-640);
                         
                             var winterlen = map(winterrain[j],56,611,0,725);      //mapping the winterrain array between certain values
                                 var c1 = (winterlen)*(sin([w])); //variable to calculate the mapped length multiplied by the sine angle 
@@ -113,6 +125,13 @@ function draw() {
                         // }
                         
                         pop();
+                            stroke(163,177,138);
+                            strokeWeight(10);
+                            line(600,-703,640,-703);
+                            textSize(10);
+                            noStroke();
+                            fill(255);
+                            text('SPRING',600,-700);
                         // for(x=1;x<360;x+=4){
                             var springlen = map(springrain[j],56,611,0,725);
                                 var e1 = (springlen)*(sin([w]));
@@ -128,6 +147,13 @@ function draw() {
                         // }
                         
                         // for(y=2;y<360;y+=4){
+                            stroke(226,194,198);
+                            strokeWeight(10);
+                            line(600,-683,640,-683);
+                            textSize(10);
+                            noStroke();
+                            fill(255);
+                            text('SUMMER',600,-680);
                             var summerlen = map(summerrain[j],56,611,0,725);
                                 var g1 = (summerlen)*(sin([w]));
                                 var h1 = (summerlen)*(cos([w]));
@@ -142,6 +168,13 @@ function draw() {
                         // }
                         
                         // for(z=3;z<360;z+=4){
+                            stroke(142,68,61);
+                            strokeWeight(10);
+                            line(600,-663,640,-663);
+                            textSize(10);
+                            noStroke();
+                            fill(255);
+                            text('AUTUMN',600,-660);
                             var autumnlen = map(autumnrain[j],56,611,0,725);
                                 var i1 = (autumnlen)*(sin([w]));
                                 var j1 = (autumnlen)*(cos([w]));
